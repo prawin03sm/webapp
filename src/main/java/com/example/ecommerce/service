@@ -1,4 +1,4 @@
-package com.example.devops-java-webapp;
+package com.example.devopsjavawebapp;
 
 import com.example.ecommerce.model.Product;
 import com.example.ecommerce.repository.ProductRepository;
