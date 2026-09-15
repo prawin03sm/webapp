@@ -19,7 +19,7 @@
         mode: '0755'
 
      - name: Create a systemd service file for the application
-      copy:
+       copy:
         dest: /etc/systemd/system/devops-java-webapp.service
         content: |
           [Unit]
