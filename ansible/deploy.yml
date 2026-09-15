@@ -5,13 +5,20 @@
       apt:
         name: openjdk-11-jre
         state: present
+    
+    - name: Ensure deployment directory exists
+      file:
+        path: /opt/devops-java-webapp
+        state: directory
+        mode: '0755'
 
     - name: Copy application JAR file to target server
       copy:
-        src: ../target/devops-java-webapp-0.0.1-SNAPSHOT.jar
+        src: "{{ playbook_dir }}/../target/devops-java-webapp-0.0.1-SNAPSHOT.jar"
         dest: /opt/devops-java-webapp/app.jar
+        mode: '0755'
 
-    - name: Create a systemd service file for the application
+     - name: Create a systemd service file for the application
       copy:
         dest: /etc/systemd/system/devops-java-webapp.service
         content: |
