@@ -28,7 +28,7 @@
 
           [Service]
           User=root
-          ExecStart=/usr/bin/java -jar /opt/devops-java-webapp/app.jar
+          ExecStart=/usr/bin/java -Dserver.port=8081 -jar /opt/devops-java-webapp/app.jar
           SuccessExitStatus=143
           Restart=on-failure
 
@@ -43,7 +43,7 @@
 
     - name: Ensure the application is running
       uri:
-        url: http://localhost:8080
+        url: http://localhost:8081
         return_content: yes
       register: result
 
