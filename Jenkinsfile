@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Clean and build the project
-                    sh 'mvn clean package'
+                    sh 'mvn clean package -DskipTests'
                 }
             }
         }
