@@ -1,0 +1,11 @@
+[web]
+localhost ansible_connection=local
+
+[production]
+your-production-server-ip ansible_connection=ssh ansible_user=your-ssh-user
+
+[staging]
+your-staging-server-ip ansible_connection=ssh ansible_user=your-ssh-user
+
+[development]
+localhost ansible_connection=local

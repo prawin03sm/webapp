@@ -1,0 +1,46 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: Ensure Java is installed
+      apt:
+        name: openjdk-11-jre
+        state: present
+
+    - name: Copy application JAR file to target server
+      copy:
+        src: ../target/devops-java-webapp-0.0.1-SNAPSHOT.jar
+        dest: /opt/devops-java-webapp/app.jar
+
+    - name: Create a systemd service file for the application
+      copy:
+        dest: /etc/systemd/system/devops-java-webapp.service
+        content: |
+          [Unit]
+          Description=DevOps Java Web Application
+          After=network.target
+
+          [Service]
+          User=root
+          ExecStart=/usr/bin/java -jar /opt/devops-java-webapp/app.jar
+          SuccessExitStatus=143
+          Restart=on-failure
+
+          [Install]
+          WantedBy=multi-user.target
+
+    - name: Start and enable the application service
+      systemd:
+        name: devops-java-webapp
+        state: started
+        enabled: yes
+
+    - name: Ensure the application is running
+      uri:
+        url: http://localhost:8080
+        return_content: yes
+      register: result
+
+    - name: Fail if the application is not reachable
+      fail:
+        msg: "The application is not running!"
+      when: result.status != 200
