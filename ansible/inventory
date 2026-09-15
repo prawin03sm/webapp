@@ -2,10 +2,10 @@
 localhost ansible_connection=local
 
 [production]
-13.201.66.209 ansible_connection=ssh ansible_user=your-ssh-user
+13.201.66.209 ansible_connection=ssh ansible_user=ubuntu
 
 [staging]
-13.201.66.209 ansible_connection=ssh ansible_user=your-ssh-user
+13.201.66.209 ansible_connection=ssh ansible_user=ubuntu
 
 [development]
 localhost ansible_connection=local
