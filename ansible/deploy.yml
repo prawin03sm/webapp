@@ -44,8 +44,11 @@
     - name: Ensure the application is running
       uri:
         url: http://localhost:8081
-        return_content: yes
+        status_code: 200
       register: result
+      until: result.status == 200
+      retries: 10
+      delay: 5
 
     - name: Fail if the application is not reachable
       fail:
