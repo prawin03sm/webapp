@@ -18,7 +18,7 @@
         dest: /opt/devops-java-webapp/app.jar
         mode: '0755'
 
-     - name: Create a systemd service file for the application
+    - name: Create a systemd service file for the application
        copy:
         dest: /etc/systemd/system/devops-java-webapp.service
         content: |
